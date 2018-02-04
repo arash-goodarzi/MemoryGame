@@ -5,7 +5,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
-
             :root{
                 --theme-color:#000000;
             }
@@ -47,7 +46,6 @@
         var ImagePerLine=6;
         var countorForImagePerPage=0;
 
-
         function myTimer(){
             if(!timerIntervalObject){
                 var myMili=0;
@@ -80,7 +78,6 @@
         }
         var heightBox= Math.floor(heightTotal/12);
         var widthBox=  Math.floor(widthTotal/12);
-
 
         var source=[
             "http://www.ilmoamal.org/bms/attachments/course_pics/RED-CIRCLE-mm.jpg",
@@ -163,17 +160,12 @@
                 };
 
                 myCadre.appendChild(myImage);
-
-
-            
+          
                 countorForImagePerPage+=1;
                 if(document.getElementsByClassName("gameClass").length%ImagePerLine==0){
-                    
                     document.getElementById("mainDiv").appendChild(document.createElement("br"));
-                    
                     countorForImagePerPage=0;
                 }
-
                 document.getElementById("mainDiv").appendChild(myCadre);
             };
 
@@ -186,7 +178,6 @@
 
         function findMood2(allElements){
             var inexOfTransformObject=-1;
-
             for(el in allElements){
                 
                 if(allElements[el].mood==2)
@@ -203,7 +194,6 @@
 
             var allElements=document.getElementsByClassName("gameClass");
             
-
             var mood2Index=findMood2(allElements);
             for(el in allElements){
                 if(allElements[el].id==allElements[indx].id){
@@ -277,7 +267,6 @@
         }
         </script>
     </head>
-
     <body>
         <div class="container">
             <div class="panel panel-default">
@@ -334,8 +323,7 @@
                         </div>
                     </div>
                 </div>                                   
-            </div> 
-                
+            </div>             
     </body>
     <script>
         (function(){
