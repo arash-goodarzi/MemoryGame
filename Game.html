@@ -1,0 +1,356 @@
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+
+            :root{
+                --theme-color:#000000;
+            }
+
+            .myClassDiv{
+                border: 2px solid greenyellow;
+                display: inline-block;
+            }
+
+            .findout{
+                border: 1px solid rgb(10, 243, 61);
+            }
+
+            h1{
+                display: inline-block
+            }
+
+            #mainDiv{
+                background: var(--theme-color);
+            }
+
+            .swatches span{
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                margin: 10px;
+                cursor: pointer;
+            }
+
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script>
+
+        //plyaer make a desicion
+        var totalCard=18;
+
+        var numberOfCards=totalCard*2;
+        var timerIntervalObject;
+        var ImagePerLine=6;
+        var countorForImagePerPage=0;
+
+
+        function myTimer(){
+            if(!timerIntervalObject){
+                var myMili=0;
+                var myTime=0;
+
+            timerIntervalObject=setInterval(function(){
+                myMili+=1
+                
+                if(myMili==10){
+                    myMili=0;
+                    myTime+=1;
+                }
+                    document.getElementById("mySecond").innerText=myTime;
+                    document.getElementById("myMiliSecond").innerText=myMili;
+                },100);
+            }
+        }
+
+        function myTimerStop(){
+            clearInterval(timerIntervalObject);
+        }
+
+        var heightTotal=(screen.height);
+        var widthTotal=(screen.width);
+
+        if(heightTotal>widthTotal){
+                heightTotal=widthTotal;
+        }else{
+            widthTotal=heightTotal;
+        }
+        var heightBox= Math.floor(heightTotal/12);
+        var widthBox=  Math.floor(widthTotal/12);
+
+
+        var source=[
+            "http://www.ilmoamal.org/bms/attachments/course_pics/RED-CIRCLE-mm.jpg",
+            "https://is3-ssl.mzstatic.com/image/thumb/Purple128/v4/9b/8a/9e/9b8a9ead-e9b2-e1d6-7962-c8459e44a008/mzl.tupwexuv.png/1200x630bb.jpg",
+            "http://clipart-library.com/data_images/482727.png",
+            "http://www.mathwords.com/r/r_assets/right%20pyramid%20square%20base%20solid.gif",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Sphere_wireframe_10deg_6r.svg/1200px-Sphere_wireframe_10deg_6r.svg.png",
+            "https://openclipart.org/image/2400px/svg_to_png/263892/Colorful-Natural-Tree.png",
+            "https://cdn.pixabay.com/photo/2013/07/12/14/09/football-147854_960_720.png",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Basketball.jpeg/220px-Basketball.jpeg",
+            "https://images-na.ssl-images-amazon.com/images/I/71%2ByQUGOR4L._SX355_.jpg",
+            "https://www.akamai.com/us/en/multimedia/images/home/akamai-architecting-for-the-cloud-video-series-hp-t4.jpg",
+            "https://cimages.prvd.com/is/image/ProvideCommerce/FE_15_CDLD_W1_SQ?$PFCProductImage$",
+            "https://static.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg",
+            "http://en.butterflycorner.net/fileadmin/_processed_/0/5/csm_Papilio_ulysses_autolycus_m_03_o_NHM_01_cade340302.jpg",
+            "https://i.ytimg.com/vi/xT6UsQwZyy0/maxresdefault.jpg",
+            "https://media1.britannica.com/eb-media/84/73184-004-E5A450B5.jpg",
+            "https://i.pinimg.com/736x/70/32/bb/7032bbee082daf62708332df63af9c5b--two-hearts-sweet-hearts.jpg",
+            "https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.aspx",
+            "https://www.wolfram.com/language/elementary-introduction/2nd-ed/img/eiwl2-3D.png",
+            "https://i.amz.mshcdn.com/b0vAlA1nRTx7WqhDsONpvL3MFbg=/1200x630/2016%2F12%2F10%2Feb%2FAP_545502066361.f94c2.jpg",
+            "http://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/landing1015-airplane.jpg?itok=z5HeRFcJ",
+            "https://www.airsafaris.co.nz/wp-content/gallery/helicopter/helicopter-crop.jpg",
+            "http://www.griffonhoverwork.com/media/131515/Copy%20of%20DSCF0049%20thumb.jpg",
+            "http://www.crystalcruises.com/images/default-source/default-album/cruise-ship-crystal-serenity.jpg?sfvrsn=0",
+            "https://products.damen.com/-/media/Products/Images/Clusters-groups/Shipping/Oil-Tanker/OTa-5700/Deliveries/Oil_Tanker_5700_Border_Tartan.jpg",
+            "https://media-cdn.tripadvisor.com/media/photo-s/05/dd/91/43/sail-pepper-day-sails.jpg",
+            "http://anchorjoburg.org/wp-content/themes/patti-child/images/anchor-church-logo.svg"
+            ];
+            
+            var dataBase1=[];
+            function pickUpDataBaseOfNeedOfPlayer(){
+                
+                dataBase1= source.slice(0, totalCard);
+            }
+            pickUpDataBaseOfNeedOfPlayer();
+
+            function createDatabase(arr){
+                var newArray = arr.slice();
+                return arr.concat(newArray);
+            }
+            
+        var dataBase=createDatabase(dataBase1);
+
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+        }
+
+        shuffle(dataBase);
+
+        function addImage(i){
+
+            var myImage=document.createElement("img");
+            myImage.src=dataBase[i];
+            myImage.style["height"]=heightBox;
+            myImage.style["width"]=widthBox;
+            myImage.style.visibility="hidden";
+
+            //myImage.style["display"]="none";
+            myImage.id=i;
+            myImage.className="gameClass";
+            myImage.mood=1;
+
+            myImage.onclick = function () { 
+                };
+
+            var myCadre=document.createElement("div");
+                myCadre.className="myClassDiv";
+                myCadre.id="div"+i;
+                myCadre.style["height"]=heightBox;
+                myCadre.style["width"]=widthBox;
+                myCadre.onclick=function(){
+                logicalGame(i);    
+                };
+
+                myCadre.appendChild(myImage);
+
+
+            
+                countorForImagePerPage+=1;
+                if(document.getElementsByClassName("gameClass").length%ImagePerLine==0){
+                    
+                    document.getElementById("mainDiv").appendChild(document.createElement("br"));
+                    
+                    countorForImagePerPage=0;
+                }
+
+                document.getElementById("mainDiv").appendChild(myCadre);
+            };
+
+        
+        function loadTheGame(){
+            for(var i=0;i<numberOfCards;i++){
+                addImage(i);
+            } 
+        }
+
+        function findMood2(allElements){
+            var inexOfTransformObject=-1;
+
+            for(el in allElements){
+                
+                if(allElements[el].mood==2)
+                {
+                    inexOfTransformObject=el;
+                }
+            }    
+            return inexOfTransformObject;
+        }
+
+        function logicalGame(indx){
+            //set the timer
+            myTimer();
+
+            var allElements=document.getElementsByClassName("gameClass");
+            
+
+            var mood2Index=findMood2(allElements);
+            for(el in allElements){
+                if(allElements[el].id==allElements[indx].id){
+                    if(mood2Index==-1){
+                        if(allElements[indx].style.visibility=="hidden"){
+                            
+                            allElements[indx].style.visibility="visible";
+                            allElements[indx].mood=2;
+                        }else{
+
+                        }
+                    }else{
+                        if(allElements[indx].id==allElements[mood2Index].id){
+                            allElements[indx].style.visibility="hidden";
+                            allElements[indx].mood=1;
+                        }
+                        if((allElements[indx].src==allElements[mood2Index].src)&&(allElements[indx].id!=allElements[mood2Index].id)){
+                            //find element
+                            allElements[indx].style.visibility="visible";
+                            allElements[mood2Index].style.visibility="visible";
+
+
+                            allElements[indx].mood=3;
+                            allElements[mood2Index].mood=3;
+                            allElements[indx].style.className="findout";
+                            allElements[mood2Index].style.className="findout";
+
+                            // verify for finishing the game
+                            var elementsMood3=[];
+                            for(ele in allElements){
+
+                                if(allElements[ele].mood==3)
+                                {
+                                    elementsMood3.push(ele);
+                                }
+                            }
+
+                            // win message
+                            if(allElements.length==elementsMood3.length){
+                                document.getElementById("messageDiv").style.visibility="visible";
+                                myTimerStop();
+                                clearInterval(timerIntervalObject);
+                                return true;
+                            }
+                            elementsMood3=[];
+                        }
+                        if((allElements[indx].src!=allElements[mood2Index].src)&&(allElements[indx].id!=allElements[mood2Index].id)){
+                            //wrong
+
+                            //show the second card
+                            allElements[indx].style.visibility="visible";
+                            allElements[mood2Index].style.visibility="visible";
+
+                            //hide in .3 second
+                            setTimeout(() => {
+                                allElements[indx].style.visibility="hidden";
+                                allElements[mood2Index].style.visibility="hidden";
+                                allElements[indx].mood=1;
+                                allElements[mood2Index].mood=1;
+                            }, 300);
+                        }
+                    }
+                    if(allElements[indx].mood==1){
+                    }else if(allElements[indx].mood==2){
+                        
+                    }
+                }else if((allElements[el].src==allElements[indx].src)){
+
+                }
+            }
+        }
+        </script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="page-header">
+                        <h1>Memory Game</h1> 
+                        <img src="./arashLogo.jpg" class="logo pull-right img-responsive" /> 
+                        <p>This game was created by Arash</p>
+                    </div>
+                </div>
+                <div class="panel-body text-center">
+                    <div class="swatches"> 
+                        <span style="background:#33ccff" id="ffff"></span>
+                        <span style="background:#ff8080"></span>
+                        <span style="background:#990099"></span>
+                        <span style="background:#cc9900"></span>
+                    </div>
+                    <div id="mainDiv" class=""></div>
+                </div>
+                <div class="panel-footer">
+                    <span>Spend time:</span>
+                    <span id="mySecond">0</span>
+                    <span>:</span> 
+                    <span id="myMiliSecond">0</span> 
+                </div>
+            </div>
+
+
+            <div class="alert alert-success" id=messageDiv style="visibility:hidden">
+                <strong>You win!</strong></div>
+
+                <!-- <button class="btn btn-primary" onclick="myTimer()">timer</button>
+                <button class="btn btn-primary" onclick="myTimerStop()">stop</button> -->
+                <button class="btn btn-danger" onclick="location.reload()">reset</button>
+
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Read Tutorial</button>
+
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Tutorial</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>This is a tutorial</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                                   
+            </div> 
+                
+    </body>
+    <script>
+        (function(){
+            loadTheGame();
+
+            var swatches=document.querySelectorAll('div.swatches span');
+                var root=document.querySelector(":root");
+
+                $('div.swatches span').click(function(e){
+                    root.style.setProperty('--theme-color',e.target.style.background);
+                });
+        })();
+    </script>
+</html>
+
+
+
+
